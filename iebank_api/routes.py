@@ -4,7 +4,7 @@ from iebank_api.models import Account
 
 @app.route('/')
 def hello_world():
-    return render_template('homepage.html')
+    return render_template('index.html')
 
 @app.route('/skull', methods=['GET'])
 def skull():
