@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from iebank_api import db, app
 from iebank_api.models import Account
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('index.html')
 
 @app.route('/skull', methods=['GET'])
 def skull():
@@ -26,10 +26,12 @@ def skull():
 def create_account():
     name = request.json['name']
     currency = request.json['currency']
-    account = Account(name, currency)
+    country = request.json['country']  
+    account = Account(name, currency, country)
     db.session.add(account)
     db.session.commit()
     return format_account(account)
+
 
 @app.route('/accounts', methods=['GET'])
 def get_accounts():
@@ -63,5 +65,6 @@ def format_account(account):
         'balance': account.balance,
         'currency': account.currency,
         'status': account.status,
-        'created_at': account.created_at
+        'created_at': account.created_at,
+        'country': account.country
     }
