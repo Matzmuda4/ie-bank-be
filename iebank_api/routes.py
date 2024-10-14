@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from iebank_api import db, app
 from iebank_api.models import Account
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return render_template('homepage.html')
 
 @app.route('/skull', methods=['GET'])
 def skull():
