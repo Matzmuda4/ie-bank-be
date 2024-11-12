@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
-
+CORS(app)
 load_dotenv()
 
 # Select environment based on the ENV environment variable
